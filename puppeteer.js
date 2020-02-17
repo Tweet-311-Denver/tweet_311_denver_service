@@ -1,3 +1,77 @@
 const puppeteer = require('puppeteer');
 
+const options = {
+  dropdowns: [
+    'No',
+    'Arm'
+  ],
+  location: '1777 Chestnut Pl',
+  description: 'Huge',
+  contact: 'test@test.com'
+};
+const dropdowns = [
+  'No',
+  'Arm'
+]
+
+const abandonedCarForm = async (options) => {
+  const { property, location, description, contact } = options;
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
+
+  await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
+  await page.waitFor(2000);
+  
+  await page.select('#categorySelect', 'REP_ABANDONEDVEHICLE');
+  await page.waitFor(2000);
+  await page.select('#QuestionSelect', `string:${property}`);
+  await page.type('#QuestionText', location, {wait: 100});
+  await page.type('#description', description, {wait: 100});
+  await page.type('#typedInEmailInput', contact, {wait: 100});
+
+
+  // await browser.close();
+};
+
+const snowRemoval = async (options) => {
+  const { description, contact } = options
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
+
+  await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
+  await page.waitFor(2000);
+
+  await page.select('#categorySelect', 'REQ_SNOWREMOVAL');
+  await page.waitFor(2000);
+  await page.type('#description', description, {wait: 100});
+  await page.type('#typedInEmailInput', contact, {wait: 100});
+}
+
+const damagedFallenTree = async (options, dropdowns) => {
+  const { location, description, contact } = options;
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
+
+  await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
+  await page.waitFor(2000);
+
+  await page.select('#categorySelect', 'REP_DMGDTREE');
+  await page.waitForSelector('#QuestionSelect');
+
+  let stringDropdowns = JSON.stringify(dropdowns);
+  await page.$$eval('#QuestionSelect', selects => selects.map((select, i) => {
+    console.log(stringDropdowns)
+    return select.value=`string:No`
+  }));
+
+  
+  
+
+  await page.waitFor(2000);
+  await page.type('#QuestionText', location, {wait: 100});
+  await page.type('#description', description, {wait: 100});
+  await page.type('#typedInEmailInput', contact, {wait: 100})
+}
+
+damagedFallenTree(options, dropdowns);
 
