@@ -1,10 +1,6 @@
 const puppeteer = require('puppeteer');
 
 const options = {
-  dropdowns: [
-    'No',
-    'Arm'
-  ],
   location: '1777 Chestnut Pl',
   description: 'Huge',
   contact: 'test@test.com'
@@ -33,6 +29,8 @@ const abandonedCarForm = async (options) => {
   // await browser.close();
 };
 
+abandonedCarForm(options)
+
 const snowRemoval = async (options) => {
   const { description, contact } = options
   const browser = await puppeteer.launch({headless: false});
@@ -58,11 +56,12 @@ const damagedFallenTree = async (options, dropdowns) => {
   await page.select('#categorySelect', 'REP_DMGDTREE');
   await page.waitForSelector('#QuestionSelect');
 
-  let stringDropdowns = JSON.stringify(dropdowns);
-  await page.$$eval('#QuestionSelect', selects => selects.map((select, i) => {
-    console.log(stringDropdowns)
-    return select.value=`string:No`
-  }));
+  await page.$$eval('#QuestionSelect', (selects, arg1, arg2) => {
+    console.log(selects[1]);
+    console.log(arg1, arg2)
+    selects[0].value=arg1;
+    selects[1].value=arg2;
+  },`string:${dropdowns[0]}`,`string:${dropdowns[1]}` );
 
   
   
@@ -73,5 +72,5 @@ const damagedFallenTree = async (options, dropdowns) => {
   await page.type('#typedInEmailInput', contact, {wait: 100})
 }
 
-damagedFallenTree(options, dropdowns);
+// damagedFallenTree(options, dropdowns);
 
