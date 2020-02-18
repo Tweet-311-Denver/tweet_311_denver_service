@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 
 const options = {
+  property: 'Private Property',
   location: '1777 Chestnut Pl',
   description: 'Huge',
   contact: 'test@test.com'
@@ -29,7 +30,7 @@ const abandonedCarForm = async (options) => {
   // await browser.close();
 };
 
-abandonedCarForm(options)
+// abandonedCarForm(options)
 
 const snowRemoval = async (options) => {
   const { description, contact } = options
@@ -63,9 +64,6 @@ const damagedFallenTree = async (options, dropdowns) => {
     selects[1].value=arg2;
   },`string:${dropdowns[0]}`,`string:${dropdowns[1]}` );
 
-  
-  
-
   await page.waitFor(2000);
   await page.type('#QuestionText', location, {wait: 100});
   await page.type('#description', description, {wait: 100});
@@ -73,4 +71,22 @@ const damagedFallenTree = async (options, dropdowns) => {
 }
 
 // damagedFallenTree(options, dropdowns);
+
+const illegalParking = async options => {
+  const { location, description, property, contact } = options;
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
+
+  await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
+  await page.waitFor(2000);
+
+  await page.select('#categorySelect', 'REQ_ILLEGALPARKING');
+  await page.waitForSelector('#QuestionSelect');
+  await page.type('#QuestionText', location, {wait: 100});
+  await page.select('#QuestionSelect', `string:${property}`);
+  await page.type('#description', description, {wait: 100});
+  await page.type('#typedInEmailInput', contact, {wait: 100});
+};
+
+// illegalParking(options);
 
