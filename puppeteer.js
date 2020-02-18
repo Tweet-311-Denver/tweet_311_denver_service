@@ -90,3 +90,21 @@ const illegalParking = async options => {
 
 // illegalParking(options);
 
+const otherForm = async options => {
+  const { description, contact } = options;
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
+
+  await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
+  await page.waitFor(2000);
+
+  await page.select('#categorySelect', 'REQ_OTHER');
+  await page.waitForSelector('#description');
+  await page.type('#description', description, {wait: 100});
+  await page.type('#typedInEmailInput', contact, {wait: 100});
+}
+
+// otherForm(options);
+
+
+
