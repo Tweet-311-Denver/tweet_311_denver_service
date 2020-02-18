@@ -1,0 +1,27 @@
+{
+  "name": "tweet_311_denver_service",
+  "version": "1.0.0",
+  "description": "Backend for Tweet311Denver Turing Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tweet-311-Denver/tweet_311_denver_service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tweet-311-Denver/tweet_311_denver_service/issues"
+  },
+  "homepage": "https://github.com/Tweet-311-Denver/tweet_311_denver_service#readme",
+  "dependencies": {
+    "hapi": "^18.1.0",
+    "pg": "^7.18.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.4",
+    "sequelize-cli": "^5.5.1"
+  }
+}
