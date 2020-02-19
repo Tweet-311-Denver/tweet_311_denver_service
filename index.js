@@ -12,10 +12,8 @@ const init = async () => {
 
     server.route(require('./lib/routes'));
 
-    models.sequelize.sync().then(function() {
-      server.start(function() {
-        console.log('Running on 3000');
-      });
+    server.start(function() {
+      console.log('Running on 3000');
     });
 };
 
