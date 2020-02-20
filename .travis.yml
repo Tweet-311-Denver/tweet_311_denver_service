@@ -14,7 +14,7 @@ env:
 - NODE_ENV=test
 
 before_script:
-  - psql 'create database tweet_311_service_test;'
+  - psql -c 'create database tweet_311_service_test;'
   - npx sequelize db:migrate --env test
   - npx sequelize db:seed:all --env test
 
