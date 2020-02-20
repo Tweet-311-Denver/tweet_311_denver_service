@@ -44,6 +44,8 @@ describe('GET /api/v1/locations', () => {
         });
 
         expect(res.statusCode).to.equal(200);
-        // expect(res.payload.length).to.equal(2);
+        const locations = JSON.parse(res.payload)
+        expect(locations[0].address_desc).to.equal("1701 Market St")
+        expect(locations.length).to.equal(2)
     });
 });
