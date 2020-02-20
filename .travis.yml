@@ -10,11 +10,8 @@ install:
 services:
   - postgresql
 
-env:
-- NODE_ENV=test
-
 before_script:
-  - psql -c 'create database tweet_311_service_test;'
+  - psql -c "CREATE DATABASE tweet_311_service_test;" -U postgres
   - npx sequelize db:migrate --env test
   - npx sequelize db:seed:all --env test
 
