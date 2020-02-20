@@ -15,7 +15,5 @@ before_script:
   - sequelize db:migrate --env test
   - sequelize db:seed:all --env test
 
-script: npm test
-
-os:
-  - "osx"
+script:
+  - npm test
