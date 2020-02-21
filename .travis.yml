@@ -1,0 +1,19 @@
+language: node_js
+
+node_js:
+  - "12"
+  - "node"
+
+install:
+  - "npm install"
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c "CREATE DATABASE tweet_311_service_test;" -U postgres
+  - sequelize db:migrate --env test
+  - sequelize db:seed:all --env test
+
+script:
+  - npm test

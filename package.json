@@ -4,7 +4,7 @@
   "description": "Backend for Tweet311Denver Turing Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "lab -v **/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,16 @@
   },
   "homepage": "https://github.com/Tweet-311-Denver/tweet_311_denver_service#readme",
   "dependencies": {
-    "puppeteer": "^2.1.1",
+    "@hapi/hapi": "^19.1.1",
     "hapi": "^18.1.0",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.4",
+    "puppeteer": "^2.1.1",
+    "sequelize": "^4.44.3",
     "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "@hapi/code": "^8.0.1",
+    "@hapi/lab": "^22.0.3"
   }
 }
