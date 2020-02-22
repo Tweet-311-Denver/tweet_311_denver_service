@@ -12,8 +12,8 @@ services:
 
 before_script:
   - psql -c "CREATE DATABASE tweet_311_service_test;" -U postgres
-  - sequelize db:migrate --env test
-  - sequelize db:seed:all --env test
+  - knex migrate:latest --env test
+  - knex seed:run --env test
 
 script:
   - npm test
