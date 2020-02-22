@@ -4,7 +4,8 @@
   "description": "Backend for Tweet311Denver Turing Project",
   "main": "index.js",
   "scripts": {
-    "test": "lab -v **/*.test.js"
+    "test": "lab -v **/*.test.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
