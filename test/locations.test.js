@@ -44,7 +44,7 @@ describe('GET /api/v1/locations', () => {
         });
 
         expect(res.statusCode).to.equal(200);
-
+        const locations = JSON.parse(res.payload)
         expect(locations[0].address_desc).to.equal("1701 Market St")
         expect(locations[0].lat).to.equal("39.751129")
         expect(locations[0].long).to.equal("-104.997486")
