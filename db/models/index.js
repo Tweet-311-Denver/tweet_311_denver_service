@@ -10,9 +10,9 @@ const db = {};
 
 let sequelize;
 console.log("env", env)
-if (config.use_env_variable) {
-  console.log("node_env", process.env.NODE_ENV)
-  sequelize = new Sequelize(config.use_env_variable);
+console.log("config", config)
+if (env === 'production') {
+  sequelize = new Sequelize(process.env.DATABASE_URL);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
