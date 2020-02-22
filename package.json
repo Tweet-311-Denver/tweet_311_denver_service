@@ -4,7 +4,8 @@
   "description": "Backend for Tweet311Denver Turing Project",
   "main": "index.js",
   "scripts": {
-    "test": "lab -v **/*.test.js"
+    "test": "lab -v **/*.test.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/Tweet-311-Denver/tweet_311_denver_service#readme",
   "dependencies": {
     "@hapi/hapi": "^19.1.1",
+    "dotenv": "^8.2.0",
     "hapi": "^18.1.0",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
