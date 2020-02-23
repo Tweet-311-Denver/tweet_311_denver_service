@@ -1,8 +1,7 @@
 language: node_js
 
 node_js:
-  - "12"
-  - "node"
+  - "stable"
 
 install:
   - "npm install"
@@ -12,8 +11,8 @@ services:
 
 before_script:
   - psql -c "CREATE DATABASE tweet_311_service_test;" -U postgres
-  - sequelize db:migrate --env test
-  - sequelize db:seed:all --env test
+  - knex migrate:latest --env test
+  - knex seed:run --env test
 
 script:
   - npm test
