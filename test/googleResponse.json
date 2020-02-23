@@ -1,0 +1,100 @@
+{
+   "plus_code": {
+      "compound_code": "Q223+F2 Denver, CO, USA",
+      "global_code": "85FQQ223+F2"
+   },
+   "results": [
+      {
+         "address_components": [
+            {
+               "long_name": "1434",
+               "short_name": "1434",
+               "types": [
+                  "street_number"
+               ]
+            },
+            {
+               "long_name": "17th Street",
+               "short_name": "17th St",
+               "types": [
+                  "route"
+               ]
+            },
+            {
+               "long_name": "Central",
+               "short_name": "Central",
+               "types": [
+                  "neighborhood",
+                  "political"
+               ]
+            },
+            {
+               "long_name": "Denver",
+               "short_name": "Denver",
+               "types": [
+                  "locality",
+                  "political"
+               ]
+            },
+            {
+               "long_name": "Denver County",
+               "short_name": "Denver County",
+               "types": [
+                  "administrative_area_level_2",
+                  "political"
+               ]
+            },
+            {
+               "long_name": "Colorado",
+               "short_name": "CO",
+               "types": [
+                  "administrative_area_level_1",
+                  "political"
+               ]
+            },
+            {
+               "long_name": "United States",
+               "short_name": "US",
+               "types": [
+                  "country",
+                  "political"
+               ]
+            },
+            {
+               "long_name": "80202",
+               "short_name": "80202",
+               "types": [
+                  "postal_code"
+               ]
+            }
+         ],
+         "formatted_address": "1434 17th St, Denver, CO 80202, USA",
+         "geometry": {
+            "location": {
+               "lat": 39.7510339,
+               "lng": -104.9973911
+            },
+            "location_type": "ROOFTOP",
+            "viewport": {
+               "northeast": {
+                  "lat": 39.75238288029149,
+                  "lng": -104.9960421197085
+               },
+               "southwest": {
+                  "lat": 39.7496849197085,
+                  "lng": -104.9987400802915
+               }
+            }
+         },
+         "place_id": "ChIJUeVds8R4bIcRhWBnF7-YUGY",
+         "plus_code": {
+            "compound_code": "Q223+C2 Denver, Colorado, United States",
+            "global_code": "85FQQ223+C2"
+         },
+         "types": [
+            "street_address"
+         ]
+      }
+   ],
+   "status": "OK"
+}
