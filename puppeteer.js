@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const abandonedCarForm = async (options) => {
+export const abandonedCarForm = async (options) => {
   const { property, location, description, email, address } = options;
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
@@ -39,7 +39,7 @@ const abandonedCarForm = async (options) => {
   return confirmation
 };
 
-const snowRemoval = async (options) => {
+export const snowRemoval = async (options) => {
   const { description, email, address } = options
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
@@ -76,7 +76,7 @@ const snowRemoval = async (options) => {
   return confirmation
 }
 
-const illegalParking = async options => {
+export const illegalParking = async options => {
   const { location, description, property, email, address } = options;
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
@@ -114,7 +114,7 @@ const illegalParking = async options => {
   return confirmation;
 };
 
-const otherForm = async options => {
+export const otherForm = async options => {
   const { description, email, address } = options;
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
@@ -130,23 +130,25 @@ const otherForm = async options => {
   await page.type('#description', description, {wait: 100});
   await page.type('#typedInEmailInput', email, {wait: 100});
   await page.waitFor(1000);
-  await page.click('#submitReport');
-  await page.waitForNavigation();
-  const confirmationNotes = await page.evaluate(() => {
-    let notes = Array.from(document.querySelectorAll('div.col-sm-9')).map(note => {
-      return note.innerText;
-  });
-    return notes
-  });
-
-  const confirmation = {
-    caseID: confirmationNotes[0],
-    category: confirmationNotes[1],
-    submittedAs: confirmationNotes[2],
-    submittedAt: confirmationNotes[3],
-    notes: confirmationNotes[4]
-  };
-
-  await browser.close();
-  return confirmation
+  
 };
+
+// await page.click('#submitReport');
+//   await page.waitForNavigation();
+//   const confirmationNotes = await page.evaluate(() => {
+//     let notes = Array.from(document.querySelectorAll('div.col-sm-9')).map(note => {
+//       return note.innerText;
+//   });
+//     return notes
+//   });
+
+//   const confirmation = {
+//     caseID: confirmationNotes[0],
+//     category: confirmationNotes[1],
+//     submittedAs: confirmationNotes[2],
+//     submittedAt: confirmationNotes[3],
+//     notes: confirmationNotes[4]
+//   };
+
+//   await browser.close();
+//   return confirmation
