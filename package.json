@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "lab -v **/*.test.js",
-    "start": "node index.js"
+    "start": "nodemon --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,9 @@
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "@hapi/code": "^8.0.1",
     "@hapi/lab": "^22.0.3",
     "nock": "^12.0.1"
