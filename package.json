@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "lab -l -v **/*.test.js",
-    "start": "nodemon index.js",
-    "herokuStart": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
