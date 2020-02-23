@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/Tweet-311-Denver/tweet_311_denver_service#readme",
   "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "@hapi/hapi": "^19.1.1",
     "dotenv": "^8.2.0",
     "hapi": "^18.1.0",
@@ -29,9 +32,6 @@
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/node": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
     "@hapi/code": "^8.0.1",
     "@hapi/lab": "^22.0.3",
     "nock": "^12.0.1"
