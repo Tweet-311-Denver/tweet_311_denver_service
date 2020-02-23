@@ -8,7 +8,6 @@ exports.seed = function(knex) {
           { category: 'other', description: 'big hole', email: 'test@test.com', location_id: locOne},
           { category: 'other', description: 'oh noes', email: 'test2@test.com', location_id: locOne}
         ], 'id')
-        console.log('reports', reports)
         .then(() => console.log('Seeding complete!'))
         .catch(error => console.log(`Error seeding data: ${error}`))
     })
