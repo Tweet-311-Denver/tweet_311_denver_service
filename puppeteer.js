@@ -130,25 +130,25 @@ export const otherForm = async options => {
   await page.type('#description', description, {wait: 100});
   await page.type('#typedInEmailInput', email, {wait: 100});
   await page.waitFor(1000);
-  
+  await page.click('#submitReport');
+  await page.waitForNavigation();
+  const confirmationNotes = await page.evaluate(() => {
+    let notes = Array.from(document.querySelectorAll('div.col-sm-9')).map(note => {
+      return note.innerText;
+  });
+    return notes
+  });
+
+  const confirmation = {
+    caseID: confirmationNotes[0],
+    category: confirmationNotes[1],
+    submittedAs: confirmationNotes[2],
+    submittedAt: confirmationNotes[3],
+    notes: confirmationNotes[4]
+  };
+
+  await browser.close();
+  return confirmation
 };
 
-// await page.click('#submitReport');
-//   await page.waitForNavigation();
-//   const confirmationNotes = await page.evaluate(() => {
-//     let notes = Array.from(document.querySelectorAll('div.col-sm-9')).map(note => {
-//       return note.innerText;
-//   });
-//     return notes
-//   });
 
-//   const confirmation = {
-//     caseID: confirmationNotes[0],
-//     category: confirmationNotes[1],
-//     submittedAs: confirmationNotes[2],
-//     submittedAt: confirmationNotes[3],
-//     notes: confirmationNotes[4]
-//   };
-
-//   await browser.close();
-//   return confirmation
