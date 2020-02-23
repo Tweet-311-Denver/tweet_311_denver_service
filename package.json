@@ -4,7 +4,7 @@
   "description": "Backend for Tweet311Denver Turing Project",
   "main": "index.js",
   "scripts": {
-    "test": "lab -v **/*.test.js",
+    "test": "lab -l -v **/*.test.js",
     "start": "nodemon --exec babel-node index.js"
   },
   "repository": {
