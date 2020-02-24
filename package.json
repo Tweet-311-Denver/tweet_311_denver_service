@@ -27,7 +27,8 @@
     "nodemon": "^2.0.2",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
-    "puppeteer": "^2.1.1"
+    "puppeteer": "^2.1.1",
+    "sinon": "^9.0.0"
   },
   "devDependencies": {
     "@hapi/code": "^8.0.1",
