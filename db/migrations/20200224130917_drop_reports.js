@@ -9,6 +9,6 @@ exports.down = function(knex) {
   return knex.schema.table('reports', table => {
     table.integer('location_id').unsigned().notNullable();
     table.foreign('location_id')
-      references('id').inTable('locations')
+      .references('id').inTable('locations')
   });
 };
