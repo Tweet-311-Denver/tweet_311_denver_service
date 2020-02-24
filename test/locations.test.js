@@ -27,7 +27,7 @@ describe('GET /', () => {
             url: `/?serviceKey=${process.env.SERVICE_KEY}`
         });
         expect(res.statusCode).to.equal(200);
-        expect(res.payload).to.equal("hello world");
+        expect(res.payload).to.equal('Welcome to Tweet311Denver Service');
     });
     it('responds with 400 with wrong serviceKey', async () => {
         const res = await server.inject({
