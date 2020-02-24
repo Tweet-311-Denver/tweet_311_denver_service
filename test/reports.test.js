@@ -17,6 +17,8 @@ describe('GET /api/v1/reports', () => {
 
   beforeEach(async () => {
       server = await init();
+      await database.seed.run();
+
   });
 
   afterEach(async () => {
@@ -32,8 +34,8 @@ describe('GET /api/v1/reports', () => {
     expect(res.statusCode).to.equal(200);
     const data = JSON.parse(res.payload)
     const reports = data.reports
-    expect(reports[0].category).to.equal("snow_removal")
-    expect(reports[0].description).to.equal("Test")
+    expect(reports[0].category).to.equal('other')
+    expect(reports[0].description).to.equal('big hole')
     expect(reports[0].image).to.equal(null)
     expect(reports[0].email).to.equal('test@test.com')
     // expect(reports.length).to.equal(2)
@@ -60,12 +62,38 @@ describe('POST /api/v1/reports', () => {
         submittedAt: '2/24 at 1:20',
         notes: 'test'
       }
-    })
+    });
     const mockRequest = {
       report: {
         category: 'snow_removal',
         description: 'Test',
         image: null,
+        email: 'test@test.com'
+      },
+      location: {
+        lat: 39.7482157,
+        long: -105.0005148
+      }
+    };
+    const mockOptions = {
+      method: 'POST',
+      url: '/api/v1/reports',
+      payload: mockRequest
+    }
+    const res = await server.inject(mockOptions);
+    console.log(res.payload)
+    const reports = await database('reports').select();
+    expect(res.statusCode).to.equal(201);
+    expect(reports.length).to.equal(1);
+    expect(stub.called).to.equal(true);
+    stub.reset();
+  });
+
+  it('should return a 422 code if request body is incomplete', async () => {
+    const mockRequest = {
+      report: {
+        category: 'other',
+        description: 'big hole',
         email: 'test@test.com'
       },
       location: {
@@ -77,13 +105,10 @@ describe('POST /api/v1/reports', () => {
       method: 'POST',
       url: '/api/v1/reports',
       payload: mockRequest
-    }
-    await database('reports').del();
+    };
     const res = await server.inject(mockOptions);
-    const reports = await database('reports').select();
-    expect(res.statusCode).to.equal(201);
-    expect(reports.length).to.equal(1);
-    expect(stub.called).to.equal(true);
-    stub.reset();
+    // const data = JSON.parse(res);
+    // console.log(data);
+    expect(res.statusCode).to.equal(422);
   })
 });

@@ -4,6 +4,9 @@ const Lab = require('@hapi/lab');
 const { expect } = require('@hapi/code');
 const { afterEach, beforeEach, describe, it } = exports.lab = Lab.script();
 const { init } = require('../lib/server');
+const environment = process.env.NODE_ENV || 'development'
+const configuration = require('../knexfile')[environment]
+const database = require('knex')(configuration)
 
 
 describe('GET /', () => {
@@ -11,6 +14,7 @@ describe('GET /', () => {
 
     beforeEach(async () => {
         server = await init();
+        await database.seed.run();
     });
 
     afterEach(async () => {
@@ -49,6 +53,6 @@ describe('GET /api/v1/locations', () => {
         expect(locations[0].address_desc).to.equal("1701 Market St")
         expect(locations[0].lat).to.equal("39.75112900")
         expect(locations[0].long).to.equal("-104.99748600")
-        // expect(locations.length).to.equal(5)
+        expect(locations.length).to.equal(2)
     });
 });
