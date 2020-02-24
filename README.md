@@ -18,7 +18,7 @@ This api is deployed on Heroku at `SECRET (until we include authorization)`
 - Hapi.js
 - Postgres v11.5
 - Knex
-- Pupeteer
+- Puppeteer
 
 
 ## Local Setup and Deployment
