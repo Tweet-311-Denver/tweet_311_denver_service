@@ -40,7 +40,7 @@ knex seed:run; knex seed:run --env test
 ```
 
 5. Run the test suite with either `npm test` or `npx lab`
-6. Deploy locally with `npm start`
+6. Deploy locally to port 3000 with `npm start`
 
 
 ## API Endpoints
@@ -57,7 +57,7 @@ This reports endpoint executes the following tasks:
 
 Example request:
 ```
-POST SECRET/api/v1/reports
+POST /api/v1/reports
 body:
 { "report": {
     "category": "other",
@@ -102,5 +102,35 @@ body:
     "submittedAt": "202002181810"
     "notes": ""
   }
+}
+```
+
+#### `GET /api/v1/reports`
+
+This endpoint returns all the reports in the Tweet311Denver Service database.
+
+Example request: `GET /api/v1/reports`
+
+Example response:
+```
+{
+    "reports": [
+        {
+            "id": 3,
+            "category": "other",
+            "description": "big hole",
+            "image": null,
+            "email": "test@test.com",
+            "location_id": 3
+        },
+        {
+            "id": 4,
+            "category": "other",
+            "description": "oh noes there's stuff in the road",
+            "image": null,
+            "email": "test2@test.com",
+            "location_id": 3
+        }
+    ]
 }
 ```
