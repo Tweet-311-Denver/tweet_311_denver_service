@@ -16,4 +16,4 @@ before_script:
   - knex seed:run --env test
 
 script:
-  - npm test
+  - npx lab -l -v **/*.test.js
