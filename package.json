@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Tweet-311-Denver/tweet_311_denver_service#readme",
   "dependencies": {
     "@hapi/hapi": "^19.1.1",
+    "@hapi/joi": "^17.1.0",
     "dotenv": "^8.2.0",
     "hapi": "^18.1.0",
     "knex": "^0.20.10",
