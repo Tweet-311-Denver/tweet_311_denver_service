@@ -24,10 +24,24 @@ describe('GET /', () => {
     it('responds with 200', async () => {
         const res = await server.inject({
             method: 'get',
-            url: '/'
+            url: `/?serviceKey=${process.env.SERVICE_KEY}`
         });
         expect(res.statusCode).to.equal(200);
         expect(res.payload).to.equal("hello world");
+    });
+    it('responds with 400 with wrong serviceKey', async () => {
+        const res = await server.inject({
+            method: 'get',
+            url: `/?serviceKey=notCorrect`
+        });
+        expect(res.statusCode).to.equal(400);
+    });
+    it('responds with 400 with no serviceKey', async () => {
+        const res = await server.inject({
+            method: 'get',
+            url: `/`
+        });
+        expect(res.statusCode).to.equal(400);
     });
 });
 
