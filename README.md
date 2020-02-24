@@ -2,7 +2,7 @@
 
 This service for Tweet311Denver app facilitates making 311 reports, fetching location information, and analysis of reports.
 
-This api is deployed on Heroku at `SECRET (until we include authorization)`
+This api is deployed on Heroku at `https://tweet311denver-service.herokuapp.com/`
 
 
 ## Contents
@@ -10,6 +10,7 @@ This api is deployed on Heroku at `SECRET (until we include authorization)`
 - Local Setup and Deployment
 - API Endpoints
   - `POST /api/v1/reports`
+  - `GET /api/v1/reports`
 
 
 ## Technologies Used
@@ -19,6 +20,7 @@ This api is deployed on Heroku at `SECRET (until we include authorization)`
 - Postgres v11.5
 - Knex
 - Puppeteer
+- Testing Suite: @hapi/lab, @hapi/code, sinon, nock
 
 
 ## Local Setup and Deployment
@@ -39,13 +41,18 @@ knex migrate:latest; knex migrate:latest --env test
 knex seed:run; knex seed:run --env test
 ```
 
-5. Run the test suite with either `npm test` or `npx lab`
-6. Deploy locally to port 3000 with `npm start`
+5. Create a `.env` file and add **environment variables**:
+  - `GOOGLE_GEOCODE_KEY`= API key for [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro)
+  - `SERVICE_KEY`= API key for this service (contact contributors for access)
+6. Run the test suite with either `npm test` or `npx lab`
+7. Deploy locally to port 3000 with `npm start`
 
 
 ## API Endpoints
 
-Endpoints are hosted at `SECRET (until we include authorization)`. Append the following routes to the url to access the api.
+Endpoints are hosted at `https://tweet311denver-service.herokuapp.com/`. Append the following routes to the url to access the api.
+
+All `POST` endpoints require query param `serviceKey` to equal your secret SERVICE_Key.
 
 #### `POST /api/v1/reports`
 
@@ -57,7 +64,7 @@ This reports endpoint executes the following tasks:
 
 Example request:
 ```
-POST /api/v1/reports
+POST /api/v1/reports?serviceKey=[SERVICE_KEY]
 body:
 { "report": {
     "category": "other",
