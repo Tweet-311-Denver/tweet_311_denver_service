@@ -4,7 +4,7 @@ const Lab = require('@hapi/lab');
 const { expect } = require('@hapi/code');
 const { afterEach, beforeEach, describe, it } = exports.lab = Lab.script();
 const { init } = require('../lib/server');
-const Geocode = require ('../lib/services/googleGeocode')
+const Geocode = require ('../lib/services/geocode')
 const nock = require('nock')
 const googleResponse = require('./googleResponse')
 
