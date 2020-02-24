@@ -4,12 +4,17 @@ const Lab = require('@hapi/lab');
 const { expect } = require('@hapi/code');
 const { afterEach, beforeEach, describe, it } = exports.lab = Lab.script();
 const { init } = require('../lib/server');
+const environment = process.env.NODE_ENV || 'development'
+const configuration = require('../knexfile')[environment]
+const database = require('knex')(configuration)
+
 
 describe('GET /', () => {
     let server;
 
     beforeEach(async () => {
         server = await init();
+        await database.seed.run();
     });
 
     afterEach(async () => {
