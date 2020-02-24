@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 const Lab = require('@hapi/lab');
 const { expect } = require('@hapi/code');
