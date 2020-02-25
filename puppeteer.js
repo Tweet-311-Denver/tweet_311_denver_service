@@ -114,7 +114,7 @@ exports.methods = {
   },
   otherForm: async options => {
     const { description, email, address } = options;
-    const browser = await puppeteer.launch({args: ['--no-sandbox'], headless: false});
+    const browser = await puppeteer.launch({args: ['--no-sandbox']});
     const page = await browser.newPage();
   
     await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
