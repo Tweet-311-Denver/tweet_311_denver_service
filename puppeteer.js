@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 exports.methods = {
   abandonedCarForm: async (options) => {
     const { property, location, description, email, address } = options;
-    const browser = await puppeteer.launch({args: ['--no-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
   
     await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
@@ -41,7 +41,7 @@ exports.methods = {
   },
   snowRemoval: async (options) => {
     const { description, email, address } = options
-    const browser = await puppeteer.launch({args: ['--no-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
   
     await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
@@ -77,7 +77,7 @@ exports.methods = {
   },
   illegalParking: async options => {
     const { location, description, property, email, address } = options;
-    const browser = await puppeteer.launch({args: ['--no-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
   
     await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
@@ -114,7 +114,7 @@ exports.methods = {
   },
   otherForm: async options => {
     const { description, email, address } = options;
-    const browser = await puppeteer.launch({args: ['--no-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
   
     await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
