@@ -9,7 +9,8 @@ const configuration = require('../knexfile')[environment]
 const database = require('knex')(configuration)
 const sinon = require('sinon');
 const puppeteer = require('../puppeteer');
-
+const nock = require('nock')
+const googleResponse = require('./googleResponse')
 
 
 describe('GET /api/v1/reports', () => {
@@ -53,41 +54,109 @@ describe('POST /api/v1/reports', () => {
     await server.stop();
   });
 
-  // it('should post a new report to the database', async () => {
-  //   const stub = sinon.stub(puppeteer.methods, 'snowRemoval').callsFake(function fakeFn() {
-  //     return {
-  //       caseID: '2313413',
-  //       category: 'Snow Removal',
-  //       submittedAs: 'test@test.com',
-  //       submittedAt: '2/24 at 1:20',
-  //       notes: 'test'
-  //     }
-  //   });
-  //   const mockRequest = {
-  //     report: {
-  //       category: 'snow_removal',
-  //       description: 'Test',
-  //       image: null,
-  //       email: 'test@test.com'
-  //     },
-  //     location: {
-  //       lat: 39.7482157,
-  //       long: -105.0005148
-  //     }
-  //   };
-  //   const mockOptions = {
-  //     method: 'POST',
-  //     url: '/api/v1/reports',
-  //     payload: mockRequest
-  //   }
-  //   const res = await server.inject(mockOptions);
-  //   console.log(res.payload)
-  //   const reports = await database('reports').select();
-  //   expect(res.statusCode).to.equal(201);
-  //   expect(reports.length).to.equal(1);
-  //   expect(stub.called).to.equal(true);
-  //   stub.reset();
-  // });
+  it('should post a new report to the database', async () => {
+    await database('reports').select().del()
+    await database('locations').select().del()
+    const reportsInDb = await database('reports').select();
+    const stub = sinon.stub(puppeteer.methods, 'snowRemoval').callsFake(function fakeFn() {
+      return {
+        caseID: '2313413',
+        category: 'Snow Removal',
+        submittedAs: 'test@test.com',
+        submittedAt: '2/24 at 1:20',
+        notes: 'test'
+      }
+    });
+    const mockRequest = {
+      report: {
+        category: 'snow_removal',
+        description: 'Test',
+        image: null,
+        email: 'test@test.com'
+      },
+      location: {
+        lat: 39.7482157,
+        long: -105.0005148
+      }
+    };
+    const mockOptions = {
+      method: 'POST',
+      url: `/api/v1/reports?serviceKey=${process.env.SERVICE_KEY}`,
+      payload: mockRequest
+    }
+
+    const latLongString = `${mockRequest.location.lat},${mockRequest.location.long}`
+
+    const mockGoogle = nock('https://maps.googleapis.com')
+      .get('/maps/api/geocode/json')
+      .query({ latlng: latLongString, key: process.env.GOOGLE_GEOCODE_KEY })
+      .reply(200, googleResponse)
+
+
+    const res = await server.inject(mockOptions);
+    const reports = await database('reports').select();
+    expect(res.statusCode).to.equal(201);
+    expect(reports.length).to.equal(1);
+    expect(stub.called).to.equal(true);
+    stub.reset();
+    stub.restore('snowRemoval');
+  });
+
+  it('should post a new report, but not a new location to the database', async () => {
+    await database('reports').select().del()
+    const locationsStart = await database('locations').select();
+
+    const reportsInDb = await database('reports').select();
+    const stub = sinon.stub(puppeteer.methods, 'snowRemoval').callsFake(function fakeFn() {
+      return {
+        caseID: '2313413',
+        category: 'Snow Removal',
+        submittedAs: 'test@test.com',
+        submittedAt: '2/24 at 1:20',
+        notes: 'test'
+      }
+    });
+    const mockRequest = {
+      report: {
+        category: 'snow_removal',
+        description: 'Test',
+        image: null,
+        email: 'test@test.com'
+      },
+      location: {
+        lat: 39.7482157,
+        long: -105.0005148
+      }
+    };
+    const mockOptions = {
+      method: 'POST',
+      url: `/api/v1/reports?serviceKey=${process.env.SERVICE_KEY}`,
+      payload: mockRequest
+    }
+
+    const latLongString = `${mockRequest.location.lat},${mockRequest.location.long}`
+
+    const mockGoogle = nock('https://maps.googleapis.com')
+      .get('/maps/api/geocode/json')
+      .query({ latlng: latLongString, key: process.env.GOOGLE_GEOCODE_KEY })
+      .reply(200, googleResponse)
+
+
+    const res = await server.inject(mockOptions);
+    const reports = await database('reports').select();
+    const locationsNoDuplicates = await database('locations').select();
+
+    expect(locationsNoDuplicates.length).to.equal(locationsStart.length)
+
+    expect(res.statusCode).to.equal(201);
+    expect(reports.length).to.equal(1);
+    expect(stub.called).to.equal(true);
+    stub.reset();
+    stub.restore('snowRemoval');
+
+  });
+
+
 
   it('should return a 422 code if request body is incomplete', async () => {
     const mockRequest = {
