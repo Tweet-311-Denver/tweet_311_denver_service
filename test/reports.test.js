@@ -15,6 +15,22 @@ const googleResponse = require('./googleResponse')
 
 describe('GET /api/v1/reports', () => {
   let server;
+  
+  describe('GET /', () => {
+    it('responds with 200', async () => {
+      const reply = {
+        message: 'Welcome to Tweet311Denver Service',
+        documentation: 'https://github.com/Tweet-311-Denver/tweet_311_denver_service'
+      }
+      const res = await server.inject({
+          method: 'get',
+          url: '/'
+      });
+      const actualReply = JSON.parse(res.payload);
+      expect(res.statusCode).to.equal(200);
+      expect(actualReply).to.equal(reply);
+    });
+  });
 
   beforeEach(async () => {
       server = await init();
