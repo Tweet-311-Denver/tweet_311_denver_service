@@ -22,26 +22,17 @@ describe('GET /', () => {
     });
 
     it('responds with 200', async () => {
-        const res = await server.inject({
-            method: 'get',
-            url: `/?serviceKey=${process.env.SERVICE_KEY}`
-        });
-        expect(res.statusCode).to.equal(200);
-        expect(res.payload).to.equal('Welcome to Tweet311Denver Service');
-    });
-    it('responds with 400 with wrong serviceKey', async () => {
-        const res = await server.inject({
-            method: 'get',
-            url: `/?serviceKey=notCorrect`
-        });
-        expect(res.statusCode).to.equal(400);
-    });
-    it('responds with 400 with no serviceKey', async () => {
+        const reply = {
+            message: 'Welcome to Tweet311Denver Service',
+            documentation: 'https://github.com/Tweet-311-Denver/tweet_311_denver_service'
+          }
         const res = await server.inject({
             method: 'get',
             url: `/`
         });
-        expect(res.statusCode).to.equal(400);
+        const actualReply = JSON.parse(res.payload);
+        expect(res.statusCode).to.equal(200);
+        expect(actualReply).to.equal(reply);
     });
 });
 
