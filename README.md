@@ -58,6 +58,7 @@ knex seed:run; knex seed:run --env test
 5. Create a `.env` file and add **environment variables**:
   - `GOOGLE_GEOCODE_KEY`= API key for [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro)
   - `SERVICE_KEY`= API key for this service (contact contributors for access)
+    - If running locally, generate a `SERVICE_KEY` in the `.env` file. 
 6. Run the test suite with `npm test`
 7. Deploy locally to port 3000 with `npm start`
 
