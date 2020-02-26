@@ -1,5 +1,5 @@
 exports.seed = function(knex) {
-  return knex('reports').del() // delete all locations
+  return knex('reports').del()
     .then( async () => {
       const locations = await knex('locations').select('id')
       const locOne = locations[0].id
