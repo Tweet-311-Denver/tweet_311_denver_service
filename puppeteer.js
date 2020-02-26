@@ -114,12 +114,12 @@ exports.methods = {
   },
   otherForm: async options => {
     const { description, email, address } = options;
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setui-sandbox']});
     const page = await browser.newPage();
   
     await page.goto('https://www.denvergov.org/pocketgov/#/report-a-problem', {waitUntil: 'networkidle2'});
     await page.waitFor(2000);
-  
+
     await page.select('#categorySelect', 'REQ_OTHER');
     await page.waitForSelector('#description');
     await page.type('#searchTerm', address, {wait: 100});
@@ -128,6 +128,7 @@ exports.methods = {
     await page.type('#description', description, {wait: 100});
     await page.type('#typedInEmailInput', email, {wait: 100});
     await page.waitFor(1000);
+
     await page.click('#submitReport');
     await page.waitForNavigation();
     const confirmationNotes = await page.evaluate(() => {
