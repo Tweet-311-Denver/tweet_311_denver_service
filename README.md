@@ -67,7 +67,7 @@ knex seed:run; knex seed:run --env test
 
 Endpoints are hosted at `https://tweet311denver-service.herokuapp.com`. Append the following routes to the url to access the api.
 
-*All `POST` endpoints require query param `serviceKey` to equal your secret SERVICE_Key.*
+*All `POST` endpoints require query param `serviceKey` to equal your secret SERVICE_KEY.*
 
 #### `GET /`
 
