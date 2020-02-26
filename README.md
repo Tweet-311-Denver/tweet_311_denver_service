@@ -72,10 +72,7 @@ Endpoints are hosted at `https://tweet311denver-service.herokuapp.com`. Append t
 
 This root endpoint allows developers to quickly check deployment of this api without a body or service key.
 
-Example request:
-```
-GET /
-```
+Example request: `GET https://tweet311denver-service.herokuapp.com/`
 
 Example response:
 ```
@@ -178,7 +175,7 @@ Example response:
 
 ## Schema
 
-
+<img width="500" alt="schema_tweet311denver_service" src="https://user-images.githubusercontent.com/26877629/75375664-c3fc1f00-588b-11ea-9daf-d97376ffaf6d.png">
 
 ## Project Board
 
