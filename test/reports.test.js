@@ -39,7 +39,6 @@ describe('GET /api/v1/reports', () => {
     expect(reports[0].description).to.equal('big hole')
     expect(reports[0].image).to.equal(null)
     expect(reports[0].email).to.equal('test@test.com')
-    // expect(reports.length).to.equal(2)
   });
 });
 
@@ -176,8 +175,6 @@ describe('POST /api/v1/reports', () => {
       payload: mockRequest
     };
     const res = await server.inject(mockOptions);
-    // const data = JSON.parse(res);
-    // console.log(data);
     expect(res.statusCode).to.equal(422);
   })
 
@@ -199,8 +196,6 @@ describe('POST /api/v1/reports', () => {
       payload: mockRequest
     };
     const res = await server.inject(mockOptions);
-    // const data = JSON.parse(res);
-    // console.log(data);
     expect(res.statusCode).to.equal(400);
 
     const mockOptions2 = {
@@ -209,8 +204,6 @@ describe('POST /api/v1/reports', () => {
       payload: mockRequest
     };
     const res2 = await server.inject(mockOptions2);
-    // const data = JSON.parse(res);
-    // console.log(data);
     expect(res2.statusCode).to.equal(400);
   })
 });
